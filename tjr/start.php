@@ -29,8 +29,14 @@ if (!$username) {
 }
 
 if (in_array($username, $user_list)) {
-    echo json_encode(['status' => 'waiting']);
-    exit();
+
+    if (is_player_enough($user_list)) {
+        echo json_encode(['status' => 'playing']);
+        exit();
+    } else {
+        echo json_encode(['status' => 'waiting']);
+        exit();
+    }
 }
 
 if (is_player_enough($user_list)) {
